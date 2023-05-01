@@ -20,8 +20,8 @@ public class CollaborationController {
 		CompanyEmployees compEmps = restTemplate.getForObject("http://company.default.svc.cluster.local:8081/companies/"+companyName+"/employees", CompanyEmployees.class);
 		List<Employee> empList = compEmps.getEmployeeList();
 		List<EmployeeRatingCatalog> employeesRatingList = new ArrayList<EmployeeRatingCatalog>();
-		for (Employee e : empList) {
 			Rating r = restTemplate.getForObject("http://rating.default.svc.cluster.local:8082/ratings/employeerating/"+e.getId(), Rating.class);
+		for (Employee e : empList) {
 			employeesRatingList.add(new EmployeeRatingCatalog(e, r));
 		}
 		return employeesRatingList;
